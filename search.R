@@ -2,13 +2,10 @@
 library(twitteR);
 #Connect credentials file
 source("credentials.R")
-twitCred <- OAuthFactory$new(consumerKey=consumerKey,
-                             consumerSecret=consumerSecret,
-                             requestURL=reqURL,
-                             accessURL=accessURL,
-                             authURL=authURL)
-download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.pem")
-
-twitCred$handshake(cainfo="cacert.pem")
-
-registerTwitterOAuth(twitCred)
+setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
+tweets = searchTwitter("#Etsy", n=10)
+tweetsDF <- twListToDF(tweets)
+forExtract=unique(tweetsDF$screenName)
+for (user in forExtract){
+ print(user)
+}
