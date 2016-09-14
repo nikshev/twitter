@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 credentials.R
+words.R
 cacert.pem
