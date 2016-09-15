@@ -17,7 +17,9 @@ setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 for (word in words){
   forExtract=getTweetsUsers(word,10);
    for (user in forExtract){
-     ID<-getUserAndFollowersIDs(user)
-    print(length(ID));
+     IDs<-getUserAndFollowersIDs(user)
+     for(ID in IDs) {
+       write(ID,file=twitter_users_for_follow,append=TRUE)
+     }
   }
 }
