@@ -9,20 +9,23 @@ follow<-function(user_id,oauth_token){
   POST("https://api.twitter.com/1.1/friendships/create.json?user_id="+user_id+"&follow=true", 
        config(token = oauth_token))
 }
+
 #Get raw data from follow data file 
-twitter_users_for_follow_data_raw<-scan(twitter_users_for_follow,what=" ")
+twitter_users_for_follow_data_raw<-read.table(twitter_users_for_follow, colClasses = "character")
 
 #Get unique data from follow data array
-twitter_users_for_follow_data<-unique(twitter_users_for_follow_data_raw);
+twitter_users_for_follow_data<-unique(twitter_users_for_follow_data_raw)
 
 #Get raw data from following data file 
-twitter_users_following_data_raw<-scan(twitter_users_for_follow,what=" ")
+twitter_users_following_data_raw<-read.table(twitter_users_following, colClasses = "character")
 
 #Get unique data from following data
-twitter_users_following_data<-unique(twitter_users_following_data_raw);
+twitter_users_following_data<-unique(twitter_users_following_data_raw)
 
 #Get difference beetwen follow and following data
-twitter_users_data_diff<-setdiff(twitter_users_for_follow_data,twitter_users_following_data)
+twitter_users_data_diff<-setdiff(twitter_users_for_follow_data$V1,twitter_users_following_data$V1)
 session_users_follow<-unique(twitter_users_data_diff[1:10])
 
-print(session_users_follow)
+#Remove NA from array
+session_users_follow <- session_users_follow[!is.na(session_users_follow)] 
+
