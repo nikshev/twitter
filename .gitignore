@@ -7,3 +7,4 @@ words.R
 cacert.pem
 twitter_users_following.txt
 twitter_users_for_follow.txt
+.httr-oauth

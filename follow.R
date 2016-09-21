@@ -29,3 +29,11 @@ session_users_follow<-unique(twitter_users_data_diff[1:10])
 #Remove NA from array
 session_users_follow <- session_users_follow[!is.na(session_users_follow)] 
 
+setup_twitter_oauth(consumer_key, consumer_secret, access_token=NULL, access_secret=NULL)
+options(httr_oauth_cache=T)
+
+readRDS('.httr-oauth')
+
+for (user_for_follow in session_users_follow) {
+  print(user_for_follow)
+}
